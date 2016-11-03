@@ -4,18 +4,8 @@ PROGRAM spamSimulation
 
     USE headerFile
     IMPLICIT NONE
-        
-    !Initialise distance stuff
-    ix = 0.0
-    iy = 0.0
-    jx = 0.0
-    jy = 0.0
-    r = 0.0
-    xDiff = 0.0
-    yDiff = 0.0
-    randNum = 0.0
 
-    !First read the input file, initialise the velocities, and the locations
+    !Read the input file
     WRITE(*,*) 'Reading input data'
     CALL readInputData
     WRITE(*,*) 'Done'
@@ -40,15 +30,11 @@ PROGRAM spamSimulation
 
     !Load in coordinates or create them new
     IF (loadCoordinates /= 1) THEN
-        WRITE(*,*) 'Initialising positions'
+        !nitialise the positions and velocities
         CALL initialisePositions
-        WRITE(*,*) 'Done'
-
-        WRITE(*,*) 'Initialising velocities'
         CALL initialiseVelocities
-        WRITE(*,*) 'Done'
-    ELSE        
-        WRITE(*,*)'Reading in coordiantes'
+    ELSE 
+        !Read in the coordinates       
         OPEN(UNIT = 20, FILE = 'coordinates.txt')
         DO i=1,nop
             READ(20,*)x(1,i),y(1,i),x(2,i),y(2,i)
@@ -59,7 +45,6 @@ PROGRAM spamSimulation
 
     !Create scatterers
     IF (nos /= 0) THEN
-        WRITE(*,*) 'Creating scatterers'
         CALL createScatterers
     END IF
 
@@ -76,19 +61,6 @@ PROGRAM spamSimulation
 
     !Create the other files
     OPEN(3, FILE = 'resultsData.txt')
-
-    !Create profiles files
-   !IF (profileType == 0) THEN
-   !    OPEN(4, FILE = 'denistyProfileSPAMAveragingX.txt')
-   !    OPEN(5, FILE = 'massFluxSPAMAveragingX.txt')
-   !    OPEN(12, FILE = 'densityProfileSPAMAveragingY.txt')
-   !    OPEN(13, FILE = 'massFluxSPAMAveragingY.txt')
-   !ELSE IF (profileType == 1) THEN
-   !    OPEN(8, FILE = 'denistyProfileBoxesX.txt')
-   !    OPEN(9, FILE = 'massFluxBoxesX.txt')
-   !    OPEN(14, FILE = 'denistyProfileBoxesY.txt')
-   !    OPEN(15, FILE = 'massFluxBoxesY.txt')
-   !END IF
     OPEN(4, FILE = 'denistyProfileX.txt')
     OPEN(5, FILE = 'massFluxX.txt')
     OPEN(12, FILE = 'densityY.txt')
@@ -105,17 +77,25 @@ PROGRAM spamSimulation
         END IF
     END IF
 
-    !Set up data file
-    WRITE(3,*)'Total Energy,', ' Kinetic Energy,', ' Potential Energy'
+    !Set up results file
+    WRITE(3,*)'Timestep,',' Total Energy,', ' Kinetic Energy,', ' Potential Energy'
 
     !Calculate the profile boxes/planes 
-    WRITE(*,*)'Creating profile plane heights'
-
     CALL createProfilePlanes
 
+    !Initialise distance stuff
+    ix = 0.0
+    iy = 0.0
+    jx = 0.0
+    jy = 0.0
+    r = 0.0
+    xDiff = 0.0
+    yDiff = 0.0
+    randNum = 0.0
+
+    !initalise the profile planes
     densityProfilesX = 0
     massFluxX = 0
-
     densityProfilesY = 0
     massFluxY = 0
 
@@ -160,7 +140,7 @@ PROGRAM spamSimulation
 
         !Write them out to files
         IF(MOD(timestep,iResults).EQ.0) THEN
-            WRITE(3,*)totalEnergy, ', ', kineticEnergy, ', ', potentialEnergy
+            WRITE(3,*)timeStep, ',', totalEnergy, ', ', kineticEnergy, ', ', potentialEnergy
         END IF
 
         !Calculate properties for profiles

@@ -20,8 +20,8 @@ equilibriumSteps 	= 0 		! When to lose the bottom boundary
 numPlanesX 			= 10 		! Number of planes for the density profile
 numPlanesY 			= 10 		! Number of planes for the density profile
 profileType 		= 0 		! Type of profile. 0 = SPAM averaging, 1 = boxes
-iScreen				= 100			! How often to write to screen
-iAnimate			= 1000		! How often to write to animate files
+iScreen				= 1000			! How often to write to screen
+iAnimate			= 100		! How often to write to animate files
 iResults			= 1			! How often to record to reulsts file
 /
 
