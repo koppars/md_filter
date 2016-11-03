@@ -15,7 +15,7 @@ EX = md_filter.exe
 SWITCH = -g   
 
 OBJECTS = header_file.o md_filter.o read_inputdata.o initialise_unit_cell.o initialise_positions.o\
-initialise_velocities.o random_number.o rhs.o rk4.o rk4.o calculate_energies.o calculate_profile_planes.o\
+initialise_velocities.o random_number.o rhs.o rk4.o boundary_conditions.o calculate_energies.o calculate_profile_planes.o\
 profiles.o average_profiles.o write_results_to_file.o create_scatterers.o lucy_1d.o lucy.o\
 density.o
  

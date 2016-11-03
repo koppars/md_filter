@@ -1,0 +1,28 @@
+&inputDeck
+dt              	= 0.001     ! timestep size 
+nts 				= 100 	! number of periods to simulate 
+nop 				= 256 		! Number of particles (total)
+fluidPotential		= 1			! Choose the potential. 1 = core repulsive, 2 = Embedded atom, 3 = BOTH
+filterPotential		= 1			! Choose the potential. 1 = core repulsive, 2 = Embedded atom, 3 = BOTH
+h 					= 3.0 		! Smoothing length			
+p0 					= 1 		! starting density
+g 					= -0.1 		! Gravity
+initaliseVels 		= 1 		! Whether to give particles a random starting velocity
+nonEquilibrium 		= 0 		! No side boundaries if using non-equilibrium
+topBoundary 		= 2 		! Type of bottom and top boundary. 1 is periodic, 2 is elastic, if 0 no boundaries at all
+sideBoundary 		= 1 		! Type of bottom and top boundary. 1 is periodic, 2 is elastic, 3 non slip, if 0 no boundaries at all
+loadCoordinates 	= 0			! Whether to load coordinates from a previous file
+shape 				= 1 		! Shape of lattice (0=square, 1=rectangle)
+nos 				= 0			! Number of scatterers ****MUST BE A SQUARE NUMBER AND BE EVEN****
+densityOfScatterers	= 0 		! Density of these scatterers (currently in a rectangle, 1/2l*2h)
+filter 				= 0 		! Whether to lose the bottom boundary after a certain amount of time
+equilibriumSteps 	= 0 		! When to lose the bottom boundary
+numPlanesX 			= 10 		! Number of planes for the density profile
+numPlanesY 			= 10 		! Number of planes for the density profile
+profileType 		= 0 		! Type of profile. 0 = SPAM averaging, 1 = boxes
+iScreen				= 100			! How often to write to screen
+iAnimate			= 1000		! How often to write to animate files
+iResults			= 1			! How often to record to reulsts file
+/
+
+
